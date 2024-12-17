@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <style>
+        body{
+            background-color: white  ;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Javascript</h1>
+
+    <input type="text" id="username" placeholder="username" name="useername" value=""/>
+
+    <button class="btn">click me</button>
+
+    <div class="todoList">
+        
+    </div>
+    <!-- Inline style -->
+    <!-- <button onclick="alert('my name is pooja')">click me</button> -->
+
+    <!-- Internal style -->
+     <script>
+        let inputValue = document.getElementById('username');
+        console.log(inputValue)
+        let getbutton = document.querySelector('.btn');
+        console.log(getbutton)
+        let todoList = document.querySelector('.todoList');
+        console.log(todoList)
+
+        getbutton.addEventListener('click', ()=>{
+            addTodo()
+        })
+        let addTodo = ()=>{
+            let pElement = document.createElement('p');
+            pElement.innerText = inputValue.value
+            console.log(pElement)
+            todoList.append(pElement)
+            inputValue.value='';
+        }
+
+        todoList.addEventListener('click', (event) => {
+            console.log(event.target)
+            let currentElement = event.target;
+            currentElement.remove()
+        })
+     </script>
+
+     <!-- external style -->
+        <!-- <script src="intro.js"></script> -->
+        <!-- <script src="datatype.js"></script> -->
+
+</body>
+</html>
