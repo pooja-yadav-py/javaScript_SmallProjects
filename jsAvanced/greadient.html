@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greadient</title>
+    <style>
+      body {
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(
+          to right top,
+          #051937,
+          #004d7a,
+          #008793,
+          #00bf72,
+          #b24332
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      button{
+        width: 100px;
+        height: 30px;
+        color: white;
+        font-size: 15px;
+      }
+      #mybtn{
+        background-color: rgb(92, 145, 229);
+      }
+      #mybtn2{
+        background-color: rgb(153, 63, 198);
+      }
+
+
+      #background-copy {
+        border: 2px black solid;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div>
+        <button id="mybtn">#5c91e5</button>
+        <button id="mybtn2">#4CAF50</button>
+      </div>
+      <h2>Copy your code here</h2>
+      <div id="background-copy">
+        background-image: linear-gradient(to right, rgb(92, 145, 229), rgb(152,
+        63, 198))
+      </div>
+    </section>
+  </body>
+  <script>
+    let hexValueButton1 = document.getElementById("mybtn");
+    let hexValueButton2 = document.getElementById("mybtn2");
+    let bodysection = document.getElementsByTagName("body");
+    let backgroundCopy = document.getElementById("background-copy");
+
+    const haxValues = () => {
+      let hexValue = "0123456789abcdef";
+      let colors = "#";
+      for (let i = 0; i < 6; i++) {
+        colors = colors + hexValue[Math.floor(Math.random() * 16)];
+      }
+      return colors;
+    };
+    const handleButton1 = () => {
+      let rgb1 = haxValues();
+      hexValueButton1.innerText = rgb1;
+      hexValueButton1.style.backgroundColor = rgb1;
+
+      document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1},#004d7a)`;
+      backgroundCopy.innerText = `background-image: linear-gradient(to right, ${rgb1}, #004d7a)`;
+    };
+
+    const handleButton2 = () => {
+      let rgb2 = haxValues();
+      hexValueButton2.innerText = rgb2;
+      hexValueButton2.style.backgroundColor = rgb2;
+      document.body.style.backgroundImage = `linear-gradient(to top,#004d7a, ${rgb2})`;
+      backgroundCopy.innerText = `background-image: linear-gradient(to right, #004d7a, ${rgb2})`;
+    };
+
+    backgroundCopy.addEventListener("click", () => {
+      navigator.clipboard.writeText(backgroundCopy.innerText);
+      alert(`your copied code is :  ${backgroundCopy.innerText}`);
+    });
+
+    hexValueButton1.addEventListener("click", handleButton1);
+    hexValueButton2.addEventListener("click", handleButton2);
+    localStorage.setItem("myname","pooja")
+  </script>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced js</title>
+  </head>
+  <style>
+    .rectangle{
+        margin-left: 50%;
+        width: 120px;
+        height: 100px;
+        background-color: cyan;
+    }
+    #mybtn{
+        margin-left: 52%;
+        margin-top: 5px;
+        background-color: blue;
+        color: white;
+        width: 10%;
+        font-size: 15px;
+    }
+    .addTransition{
+        border-radius: 50%;
+    }
+    .addTransition3{
+        border-radius: 50%;
+        background-color: blue;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        translate: -10rem 0;
+    }
+    .addTransition4{
+        translate: 10rem 0;
+    }
+    .addTransition5{
+        translate: -10rem 0;
+    }
+    .addTransition6{
+        border-radius: 0%;
+        translate: 0rem 0;;
+    }
+  </style>
+  <body>
+    <section>
+        <!-- 3 ways to add event -->
+        <!-- start inline event -->
+  
+        <!-- <h1>Inline event</h1>
+        <button onclick="alert('welcome in my code')">greeting</button>
+        <button ondblclick="prompt('what is your name?')">greeting again</button>
+        <button onmouseover="prompt('what is your age?')">greeting again</button>
+         -->
+        <!-- End inline event -->
+  
+        <!--start using Dom event handler -->
+        <!-- <h1>Dom event handler</h1>
+        <button id="first">greeting</button>
+        <button id="second">greeting again</button>
+         -->
+        <!--end start using Dom event handler  -->
+  
+        <!--start addEventListner-->
+        <!-- <h1>addEventListner</h1>
+        <button id="btn">greeting</button>
+        <button id="btn2">greeting again</button>
+        -->
+        <!--end addEventListner -->
+    </section> 
+    
+
+    <!-- <section>
+        <h1>mouse event</h1>
+        <div class="rectangle"></div>
+        <button id="mybtn">click me</button>
+    </section> -->
+
+    <section>
+        <div>
+            <input type="text" id="myInput" placeholder="type somthing..." name="text" value="">
+            <div class="output">
+                <p class="keyPressed">Key presse:</p>
+                <p class="keyCode">Key codde:</p>
+                <p class="charCode">Char code:</p>
+                <p class="eventType">Event type:</p>
+            </div>
+        </div>
+    </section>
+
+  </body>
+  <script>
+    const handleKeyPress = (event)=>{
+        console.log(event);
+        console.log("key pressed:",event.key )
+        console.log("key code:",event.code )
+        console.log("Event Type:",event.type )
+        document.querySelector('.keyPressed').innerText = `Key presse: ${event.key}`
+        document.querySelector('.keyCode').innerText = `Key code: ${event.keyCode}`
+        document.querySelector('.charCode').innerText = `Char code: ${event.charCode}`
+        document.querySelector('.eventType').innerText = `Event type: ${event.type}`
+
+
+
+    }
+    let myInput = document.getElementById('myInput');
+    myInput.addEventListener('keyup',handleKeyPress);
+    
+
+
+    /*    document.getElementById('first').onclick=()=>{
+        alert("this is dom welcome")
+    }
+    document.getElementById('second').onmousedown=()=>{
+        alert("this is dom welcome 2")
+    }
+
+    document.getElementById('btn').addEventListener('click',()=>{
+        prompt("what is your fav meal?")
+    })
+
+    document.getElementById('btn2').addEventListener('click',()=>{
+        confirm("are you ready?");
+    })
+ */
+
+    /* let mybox = document.querySelector('.rectangle');
+    console.log(mybox)
+    let mybutton = document.getElementById('mybtn');
+
+    const handleMouseEvent1 = ()=>{
+        mybox.style.backgroundColor = 'red';
+    }
+
+    const handleMouseEvent2 = ()=>{
+        mybox.classList.add('addTransition');
+    }
+    const handleMouseEvent3 = ()=>{
+        mybox.classList.add('addTransition3');
+    }
+    const handleMouseEvent4 = ()=>{
+        mybox.classList.add('addTransition4')
+    }
+    const handleMouseEvent5 = ()=>{
+        mybox.classList.add('addTransition5')
+    }
+    const handleMouseEvent6 = ()=>{
+        mybox.classList.add('addTransition6')
+    }
+
+    mybutton.addEventListener('click',handleMouseEvent1)
+    mybutton.addEventListener('dblclick',handleMouseEvent2)
+    mybox.addEventListener('mouseover',handleMouseEvent3)
+    mybox.addEventListener('mouseout',handleMouseEvent4)
+    mybox.addEventListener('mousedown',handleMouseEvent5)
+    mybox.addEventListener('mouseup',handleMouseEvent6)
+ */
+
+
+
+
+  </script>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: #fff;
+      }
+
+      section {
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        box-sizing: border-box;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2rem;
+        color: #6a11cb;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
+
+      input[type="text"] {
+        width: 75%;
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px 15px;
+        background: #6a11cb;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background: #2575fc;
+        transform: translateY(-2px);
+      }
+
+      #todo-list {
+        margin-top: 20px;
+      }
+
+      .main-todo-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #f9f9f9;
+        color: #333;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .main-todo-list li {
+        list-style: none;
+        font-size: 1rem;
+      }
+
+      .deleteBtn {
+        padding: 5px 10px;
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.3s ease;
+      }
+
+      .deleteBtn:hover {
+        background: #ff1a1a;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div>
+        <h1>TODO APP</h1>
+        <input
+          type="text"
+          id="input"
+          name="todo"
+          value=""
+          placeholder="Add an item..."
+        />
+        <button id="btn">Add Item</button>
+        <div id="todo-list"></div>
+      </div>
+    </section>
+
+    <script>
+      let inputField = document.getElementById("input");
+      let buttonHandle = document.getElementById("btn");
+      let todoList = document.getElementById("todo-list");
+      let array = JSON.parse(localStorage.getItem("list")) || [];
+
+      // Function to render a single todo item
+      const renderTodo = (value) => {
+        let newItemList = document.createElement("div");
+        newItemList.classList.add("main-todo-list");
+        newItemList.innerHTML = `<li>${value}</li><button class="deleteBtn">Delete</button>`;
+
+        // Add delete functionality
+        let deleteButton = newItemList.querySelector(".deleteBtn");
+        deleteButton.addEventListener("click", () => {
+          array = array.filter((item) => item !== value); // Remove from array
+          localStorage.setItem("list", JSON.stringify(array)); // Update localStorage
+          todoList.removeChild(newItemList); // Remove from DOM
+        });
+
+        todoList.appendChild(newItemList);
+      };
+
+      // Add todo item
+      const handleInputField = () => {
+        let todoValue = inputField.value.trim();
+        if (todoValue === "") {
+          alert("Please enter a valid task!");
+          return;
+        }
+
+        if (!array.includes(todoValue)) {
+          array.push(todoValue);
+          array = [...new Set(array)]; // Prevent duplicates
+          localStorage.setItem("list", JSON.stringify(array)); // Save to localStorage
+          renderTodo(todoValue); // Render the new todo
+          inputField.value = ""; // Clear the input field
+        } else {
+          alert("Task already exists!");
+        }
+      };
+
+      // Render all todo items from localStorage
+      const showTodoList = () => {
+        todoList.innerHTML = ""; // Clear the list to prevent duplicates
+        array.forEach((item) => renderTodo(item));
+      };
+
+      // Event listener for adding a task
+      buttonHandle.addEventListener("click", handleInputField);
+
+      // Initial rendering of stored todos
+      showTodoList();
+    </script>
+  </body>
+</html>
