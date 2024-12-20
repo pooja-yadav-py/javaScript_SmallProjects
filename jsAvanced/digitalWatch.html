@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Watch</title>
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        background-color: skyblue;
+        overflow: hidden;
+      }
+      #main {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .outer-watch {
+        width: 200px;
+        height: 50px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div id="main">
+        <h1>Digital Watch</h1>
+        <div class="outer-watch">
+          <h3 id="formate-time"></h3>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script>
+    const digitalWatch = ()=>{
+        let currentTime, sec, hours, min, time;
+        currentTime = new Date();
+        hours = currentTime.getHours();
+        min = currentTime.getMinutes();
+        sec = currentTime.getSeconds();
+        time = hours > 12 ? "PM" : "AM";
+
+        let updatetime = document.getElementById("formate-time");
+        updatetime.innerText = `${hours}:${min}:${sec} ${time}`;
+    }
+    digitalWatch();
+    setInterval(digitalWatch,1000)
+   
+  </script>
+</html>
