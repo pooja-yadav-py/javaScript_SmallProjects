@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #main {
+            width: 60%; 
+            max-width: 500px; 
+            height: auto;
+            background-color: rgb(231, 223, 223);
+            color: black;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #btnSection{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+            align-content: center;
+            padding: 20px;
+           
+            
+        }
+        button{
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-transform: capitalize;
+            width: 100%;
+            transition: all 0.3s ease;  
+                  
+        }
+        button:hover{
+            background-color: #073f08;
+            transform: scale(1.05);
+        }
+        button:disabled, button:active{
+            background-color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <section id="main">
+        <div id="outer">
+            <h1 id="heading">Stop <i>Watch </i> timer</h1>
+            <h2 id="watch-number">0</h2>
+            <div id="btnSection">
+                <button class="start">Start</button>
+                <button class="stop">Stop</button>
+                <button class="reset">Reset</button>
+                <button class="gettime">GetTime</button>
+                <button class="cleartime">ClearTime</button>
+            </div>
+            <div id="timeList"></div>
+        </div>
+    </section>
+</body>
+<script>
+    let c=0,stopTime;
+    let start = document.querySelector('.start')
+    let heading = document.getElementById('watch-number');
+    let stop = document.querySelector('.stop')
+    let reset = document.querySelector('.reset')
+    let gettime = document.querySelector('.gettime')
+    let cleartime = document.querySelector('.cleartime');
+    let timeList = document.getElementById('timeList');
+
+    console.log(stop)
+    const startTimer = ()=>{
+        console.log(start)
+        start.disabled = true;
+        heading.innerText = ++c;
+         stopTime = setInterval(()=>{
+            heading.innerText = ++c;
+        },1000)
+    }
+
+    const stopTimer = ()=>{
+        start.disabled = false;
+        getCurrentTime()
+        clearInterval(stopTime);
+        
+    }
+
+    const resetTimer = () =>{
+        stopTimer();
+        c=0;
+        heading.innerText = c;
+    }
+
+    const getCurrentTime = () =>{
+        let newParaElemt = document.createElement('p');
+        newParaElemt.classList.add("time-list");
+        newParaElemt.innerText =`The Stop Time is ${c}`;
+        timeList.appendChild(newParaElemt);
+    }
+
+    const clearTimeList = () =>{
+        timeList.innerHTML = '  '
+    }
+
+    start.addEventListener('click',startTimer);
+    stop.addEventListener('click',stopTimer);
+    reset.addEventListener('click',resetTimer);
+    gettime.addEventListener('click',getCurrentTime);
+    cleartime.addEventListener('click',clearTimeList);
+
+</script>
+</html>
